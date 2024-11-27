@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Creatures - JS Data Attributes Example</title>
-
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width">
+            <link rel="icon" type="image/x-icon" href="images/favibat.ico">
+            <title>Myra's Creatures</title>
         <style>
             
-            div.creature{
+            body {
+                background-color: #170312;
+                color:#E7DFC6;
+            }
+
+            div.creature {
                 padding:5px;
-                border:2px solid black;
+                border:2px solid rgb(150, 124, 124);
                 border-radius:10px;
                 max-width:400px;
                 min-height:100px;
@@ -17,14 +25,46 @@
             div.creature img{
                 max-width:200px;
                 float:right;
-    
             }
 
+            .buttons{
+                margin-top: 20px;
+            }
+
+            .buttons{
+                margin: 5px;
+                padding: 10px;
+                cursor: pointer;
+            }
+
+            div.footer {
+                clear: both;
+                text-align: center;
+                padding: 1em;
+                font-size: 0.8em;
+                background-color: #1b1518;
+            }
+
+            ::selection {
+                color: #E7DFC6; 
+                background: #AD343E;
+            }
+
+            a {
+                color:#AD343E;
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: #E7DFC6;
+                background-color: #AD343E;
+                text-decoration: none;
+            }
         </style>
     </head>   
     <body>
     <h1>Creatures</h1>
-    <h3>A JavaScript data attributes example by NAME HERE</h3>
+    <h3>A JavaScript data attributes example by Myra Rudy</h3>
     <p>This page demonstrates how to use JavaScript data attributes to differentiate data.</p>
     <p>When you click <b>Show Creature Home</b>, the background color will change color based on their natural environment:
     </p> 
@@ -39,93 +79,115 @@
     <p>When you click <b>Show Creature Type</b>, the border color and style will changed based on the type of creature:</p>
     <div> 
         <ul>
-            <li>animal: soli red</li>
+            <li>animal: solid red</li>
             <li>insect: dashed orange</li>
         </ul>
-    </div>
-    <div class="creature">    
+    <div class = "creature" data-type = "animal" data-home = "land">    
         <img src="images/monkey.png" alt="monkey">
         <h3>Monkey</h3>
         <p>Monkeys are cute, but don't try to cuddle them.</p>
     </div>
         
-   <div class="creature">    
+    <div class = "creature" data-type = "animal" data-home = "air">    
         <img src="images/hummingbird.png" alt="hummingbird">
         <h3>Hummingbird</h3>
         <p>Hummingbirds are cute, but don't get in the way of their food.</p>
     </div>
         
-    <div class="creature">    
+    <div class="creature" data-type = "insect" data-home = "land">    
         <img src="images/spider.png" alt="spider">
         <h3>Spiders</h3>
     <p>Spiders are not cute, in fact they creep me out.</p>
     </div>
         
-   <div class="creature">    
+    <div class="creature" data-type = "animal" data-home= "air">    
         <img src="images/crow.png" alt="crow">
         <h3>Crow</h3>
         <p>Crows are not cute, and don't feed them your french fries.</p>
     </div> 
         
         
-    <div class="creature">    
+    <div class="creature" data-type = "animal" data-home = "water">    
         <img src="images/fish.png" alt="fish">
         <h3>Fish</h3>
         <p>Fish are not cute, but they taste good!</p>
     </div>
         
-    <div class="creature">    
+    <div class="creature" data-type = "insect" data-home = "land">    
         <img src="images/stinkbug.png" alt="stinkbug">
         <h3>Stink Bug</h3>
-        <p>Stinkbugs are not cool!  Don't touch them!</p>
-    </div>    
+        <p>Stinkbugs are disgusting!  Don't touch them!</p>
+    </div>
         
     <p>
         <button onclick="showHome()">Show Creature Home</button> 
         <button onclick="showType()">Show Creature Type</button> 
         <button onclick="clearAll()">Clear All</button>
     </p>
-     
+
+    <div class="footer">
+        <footer>
+            <p><small><a href="https://c.tenor.com/ua2pghKGg4YAAAAC/tenor.gif" target="_blank" alt="real image of me making this site">&copy;</a> 2024-<span id="this-year"></span> by 
+                Myra Rudy, All Rights Reserved - 
+                <a id="html-checker" href="#" target="_blank">Check HTML</a> - 
+                <a id="css-checker" href="#" target="_blank">Check CSS</a></small>
+            </p>
+            <p><small>Contact me: 
+                <a id="discord" href="https://discord.com/users/280161373495754753" target="_blank">Discord</a> -
+                <a id="email" href="mailto:mrudy@sea.yearup.org" target="_blank">Email Me</a> - 
+                <a id="email" href="https://www.instagram.com/rudy_shoots/" target="_blank">Instagram</a></small>
+            </p>
+        </footer>
+    </div>
+
     <script>
 
-        
-        function showHome()
-        {
-            /*
-                loop through all creatures
-                
-                if creature lives on land, background color green
-                if creature lives in water, blue
-                if creature lives in air, yellow
-                
-                */
-               alert("showHome()");
-            
+        // Create a function called showHome
+        function showHome() {
+            function changeBackgroundColor(home, color) {
+                //Select all elements with the class 'creature'
+                const creatures = document.querySelectorAll(".creature");
+                //Loop through the NodeList and change background color based on the type
+                creatures.forEach((creature) => {
+                    if (creature.getAttribute("data-home") === home) {
+                        creature.style.backgroundColor = color;
+                    }
+                });
+            }
+            // Call changeBackgroundColor function with appropriate arguments
+            changeBackgroundColor('land', 'darkgreen'); changeBackgroundColor('water', 'darkblue'); changeBackgroundColor('air', 'darkgoldenrod');
         }//end showHome()
         
-        function showType()
-        {
-            /*
-                loop through all creatures
-                
-                if creature is an animal, border color solid red
-                if creature is an insect, border color is dashed orange
-            */
-            alert("showType()");
-        }//end showType()
+        // Create a function called showType    
+        function showType() {
+            // Create a function called changeBorderColor
+            function changeBorderColor(type, color) {
+            // Select all elements with the class 'creature'
+                const creatures = document.querySelectorAll(".creature");
+                // Loop through the NodeList and change border color based on the home
+                creatures.forEach((creature) => {
+                    if (creature.getAttribute("data-type") == type) {
+                        creature.style.borderColor = color;
+                    }
+                });
+            }
+            // Call the changeBorderColor function with desired arguments
+            changeBorderColor('animal', 'red'); changeBorderColor('insect', 'orange');
+        }// end showType()
+        
+        // Create a function called clearAll
+        function clearAll() {
+            // get all the elements with the name creature
+            var creatures = document.getElementsByClassName('creature');
 
-        function clearAll()
-        {
-            /*
-                loop through all creatures
-                
-                clear border back to 1px solid black
-                clear background color to white
-                
-            */
-            alert("clearAll()");
-        }//end clearAll()
-
+            // loop through all creatures
+            for (var i = 0; i < creatures.length; i++) {
+                // Clear border back to 1px solid black
+                creatures[i].style.border = '1px solid black';
+                // Clear background color to white
+                creatures[i].style.backgroundColor = '#170312';
+            }// end clearAll()
+        }   
     </script>    
     </body>
 </html>
